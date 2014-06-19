@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MarvellPowerPolicyDaemon>
+  <Version>1.0</Version>
+  <General>
+    <poll_interval>30</poll_interval>
+    <verbosity>5</verbosity>
+    <enable_remote>1</enable_remote>
+    <remote_group>system</remote_group>
+  </General>
+  <Plugins>
+    <android enable="1">
+      <!--boot complete event-->
+      <event keyword="boot" intent="android.intent.action.BOOT_COMPLETED" status="1" />
+      <!--screen state event-->
+      <event keyword="screen" intent="android.intent.action.SCREEN_ON" status="1" />
+      <event keyword="screen" intent="android.intent.action.SCREEN_OFF" status="0" />
+      <!--phone state event-->
+      <event keyword="phone" intent="android.intent.action.PHONE_STATE" status="0">
+        <extra type="String" name="state" value="RINGING" status="1"/>
+        <extra type="String" name="state" value="OFFHOOK" status="1"/>
+        <extra type="String" name="state" value="IDLE" status="0"/>
+      </event>
+      <!--fm state event-->
+      <event keyword="fm" intent="com.marvell.fmradio.ENABLE" status="1" />
+      <event keyword="fm" intent="com.marvell.fmradio.DISABLE" status="0" />
+      <event keyword="fm" intent="com.marvell.fmradio.RECORD" status="0" />
+      <event keyword="fm" intent="com.marvell.fmradio.STOPRECORD" status="1" />
+      <!--monitor current task event-->
+      <event keyword="monitor_task" intent="com.marvell.cpugadget.TASK_MONITOR">
+        <extra type="String" name="taskName" />
+      </event>
+      <monitor_config>ams_list.xml</monitor_config>
+    </android>
+    <coda enable="1" />
+    <thermal enable="1" >
+      <event keyword="thermal" intent="com.marvell.thermal.STATE_CHANGED" status="0">
+        <extra type="String" name="state" value="safe" status="0"/>
+        <extra type="String" name="state" value="noticeable" status="1"/>
+        <extra type="String" name="state" value="warning" status="2"/>
+        <extra type="String" name="state" value="critical" status="3"/>
+      </event>
+    </thermal>
+    <input enable="1" />
+  </Plugins>
+  <Rules>
+    <Bootup level="0" constraint="Booting" enable="1">
+      <android_state>boot=0</android_state>
+    </Bootup>
+    <BootComplete level="0" constraint="Ondemand" enable="1">
+      <android_state>boot=1</android_state>
+    </BootComplete>
+    <Benchmark level="0" constraint="PerformanceHigh" enable="1">
+      <android_state>boot=1</android_state>
+      <monitor_task>benchmark</monitor_task>
+    </Benchmark>
+    <Game level="0" constraint="GamePlay" enable="1">
+      <android_state>boot=1</android_state>
+      <monitor_task>game</monitor_task>
+    </Game>
+    <VideoOff level="0" constraint="CodaDefault" enable="1">
+      <coda_info>state=0</coda_info>
+    </VideoOff>
+    <VideoPlay level="0" constraint="CodaPlayback" enable="1">
+      <coda_info>state=1</coda_info>
+    <coda_info>type=decode</coda_info>
+    </VideoPlay>
+    <Camcorder level="0" constraint="CodaRecord" enable="1">
+      <coda_info>state=1</coda_info>
+      <coda_info>type=encode</coda_info>
+    </Camcorder>
+    <AudioPlay level="0" constraint="AudioPlayOpt" enable="1">
+      <android_state>screen=0</android_state>
+    </AudioPlay>
+    <CallIn level="0" constraint="RadioIn" enable="1">
+      <android_state>fm=0</android_state>
+      <android_state>phone=1</android_state>
+    </CallIn>
+    <CallIdle level="0" constraint="RadioIdle" enable="1">
+      <android_state>fm=0</android_state>
+      <android_state>phone=0</android_state>
+    </CallIdle>
+    <ThermalWarning level="1" constraint="OverHeat" enable="1">
+      <thermal_state>state=2</thermal_state>
+    </ThermalWarning>
+  <Booster level="1" constraint="Boosting" enable="1">
+      <android_state>booster=1</android_state>
+    </Booster>
+    <InputEvent level="0" constraint="OndemandHigh" enable="1">
+      <android_state>boot=1</android_state>
+      <android_state>screen=1</android_state>
+      <input_event>1</input_event>
+    </InputEvent>
+  </Rules>
+  <Constraints>
+    <Booting>
+      <cpu>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>performance</governor>
+      </cpu>
+      <shcmd>
+        <exec>echo 1 > /sys/devices/system/cpu/hotplug/lock</exec>
+        <exec>echo 0 > /sys/devices/system/cpu/cpu1/online</exec>
+      </shcmd>      
+    </Booting>
+    <PerformanceHigh>
+      <cpu>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>performance</governor>
+      </cpu>
+      <gpu>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </gpu>
+      <ddr>
+        <minfreq>100%</minfreq>
+      <maxfreq>100%</maxfreq>
+        <interval>50</interval>
+        <governor>simple_ondemand</governor>
+      </ddr>
+    </PerformanceHigh>
+    <Ondemand>
+      <shcmd>
+        <exec>echo 0 > /sys/devices/system/cpu/hotplug/lock</exec>
+      </shcmd>    	
+      <cpu>
+        <minfreq>0%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </cpu>
+      <gpu>
+        <minfreq>0%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </gpu>
+      <ddr>
+        <minfreq>0%</minfreq>
+      <maxfreq>100%</maxfreq>
+        <interval>50</interval>
+        <governor>simple_ondemand</governor>
+      </ddr>
+    </Ondemand>
+    <GamePlay>
+      <cpu>
+        <minfreq>312000</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>conservative</governor>
+      <down_threshold>60</down_threshold>
+        <up_threshold>95</up_threshold>
+      </cpu>
+    </GamePlay>
+    <CodaDefault>
+      <shcmd>
+        <exec>echo 312000 > /sys/class/devfreq/devfreq-vpu/userspace/set_freq</exec>
+      </shcmd>
+    </CodaDefault>
+    <CodaPlayback>
+      <shcmd>
+        <exec>echo 208000 > /sys/class/devfreq/devfreq-vpu/userspace/set_freq</exec>
+      </shcmd>
+    </CodaPlayback>
+    <CodaRecord>
+      <cpu>
+        <minfreq>312000</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </cpu>
+    <ddr>
+        <minfreq>312000</minfreq>
+        <maxfreq>100%</maxfreq>
+        <interval>50</interval>
+        <governor>simple_ondemand</governor>
+      </ddr>
+
+</CodaRecord>
+    <AudioPlayOpt>
+      <cpu>
+        <minfreq>25%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </cpu>
+    </AudioPlayOpt>
+    <RadioIn>
+      <shcmd>
+        <exec>echo enabled > /sys/devices/platform/pxa27x-keypad/power/wakeup</exec>
+	<exec>echo 1 > /proc/driver/pm800_headset</exec>
+      </shcmd>
+    </RadioIn>
+    <RadioIdle>
+      <shcmd>
+        <exec>echo disabled > /sys/devices/platform/pxa27x-keypad/power/wakeup</exec>
+	<exec>echo 0 > /proc/driver/pm800_headset</exec>
+      </shcmd>
+    </RadioIdle>
+    <OverHeat>
+      <cpu>
+        <minfreq>0%</minfreq>
+        <maxfreq>50%</maxfreq>
+        <governor>ondemand</governor>
+      </cpu>
+    </OverHeat>
+  <Boosting>
+      <cpu>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </cpu>
+    </Boosting>
+    <OndemandHigh>
+      <cpu>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </cpu>
+      <gpu>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <governor>ondemand</governor>
+      </gpu>
+      <ddr>
+        <minfreq>100%</minfreq>
+        <maxfreq>100%</maxfreq>
+        <interval>50</interval>
+        <governor>simple_ondemand</governor>
+      </ddr>
+    </OndemandHigh>
+  </Constraints>
+</MarvellPowerPolicyDaemon>
