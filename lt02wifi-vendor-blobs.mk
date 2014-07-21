@@ -151,6 +151,7 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/consumerir.mrvl.so:system/lib/hw/consumerir.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/gralloc.mrvl.so:system/lib/hw/gralloc.mrvl.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/hw/hwcomposer.mrvl.so:system/lib/hw/hwcomposer.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/sensors.mrvl.so:system/lib/hw/sensors.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libmrvlpreprocessing.so:system/lib/soundfx/libmrvlpreprocessing.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/lib_SA_GoogleFX_ver119h.so:system/lib/lib_SA_GoogleFX_ver119h.so \
