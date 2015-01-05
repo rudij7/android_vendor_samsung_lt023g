@@ -8,8 +8,7 @@ echo 0 > /sys/class/rfkill/rfkill0/state
 echo 1 > /sys/class/rfkill/rfkill0/state
 
 insmod /system/lib/modules/mlan.ko
-insmod /system/lib/modules/sd8xxx.ko
-insmod /system/lib/modules/bt8xxx.ko
+insmod /system/lib/modules/sd8xxx.ko "mfg_mode=1 drv_mode=1 fw_name=mrvl/sd8787_Ax.bin" 
 
-ifconfig mlan0 up
+insmod /system/lib/modules/bt8xxx.ko "multi_fn=4"
 hciconfig hci0 up

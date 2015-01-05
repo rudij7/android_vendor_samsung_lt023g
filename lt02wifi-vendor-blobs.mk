@@ -42,9 +42,11 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/bin/hwacc:system/bin/hwacc \
     vendor/samsung/lt02wifi/proprietary/system/bin/ionsyx:system/bin/ionsyx \
     vendor/samsung/lt02wifi/proprietary/system/bin/load_prod_8787.sh:system/bin/load_prod_8787.sh \
+    vendor/samsung/lt02wifi/proprietary/system/bin/load_mfg_8787.sh:system/bin/load_mfg_8787.sh \
     vendor/samsung/lt02wifi/proprietary/system/bin/macloader:system/bin/macloader \
-    vendor/samsung/lt02wifi/proprietary/system/bin/MarvellWirelessDaemon:system/bin/MarvellWirelessDaemon \
     vendor/samsung/lt02wifi/proprietary/system/bin/mlanutl:system/bin/mlanutl \
+    vendor/samsung/lt02wifi/proprietary/system/bin/mrvl_dut:system/bin/mrvl_dut \
+    vendor/samsung/lt02wifi/proprietary/system/bin/mrvl_dut.sh:system/bin/mrvl_dut.sh \
     vendor/samsung/lt02wifi/proprietary/system/bin/msocket_testport:system/bin/msocket_testport \
     vendor/samsung/lt02wifi/proprietary/system/bin/npsmobex:system/bin/npsmobex \
     vendor/samsung/lt02wifi/proprietary/system/bin/open_aud_path_fm_headset.sh:system/bin/open_aud_path_fm_headset.sh \
@@ -72,6 +74,8 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/bin/usr_path_ctrl:system/bin/usr_path_ctrl \
     vendor/samsung/lt02wifi/proprietary/system/bin/vcm:system/bin/vcm \
     vendor/samsung/lt02wifi/proprietary/system/bin/vt_test:system/bin/vt_test \
+    vendor/samsung/lt02wifi/proprietary/system/bin/wlandutservice:system/bin/wlandutservice \
+    vendor/samsung/lt02wifi/proprietary/system/bin/wlandutservice.sh:system/bin/wlandutservice.sh \
     vendor/samsung/lt02wifi/proprietary/system/etc/bluetooth/bt_secure_manager_app_pub_key:system/etc/bluetooth/bt_secure_manager_app_pub_key \
     vendor/samsung/lt02wifi/proprietary/system/etc/bluetooth/iop_bt.db:system/etc/bluetooth/iop_bt.db \
     vendor/samsung/lt02wifi/proprietary/system/etc/bluetooth/iop_device_list.conf:system/etc/bluetooth/iop_device_list.conf \
@@ -79,12 +83,13 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/bt_init_cfg.conf:system/etc/firmware/mrvl/bt_init_cfg.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/cal_data.conf:system/etc/firmware/mrvl/cal_data.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/reg_alpha2:system/etc/firmware/mrvl/reg_alpha2 \
-    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/sd8777_uapsta.bin:system/etc/firmware/mrvl/sd8777_uapsta.bin \
-    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/sd8787_uapsta.bin:system/etc/firmware/mrvl/sd8787_uapsta.bin \
-    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/SDIO8777_SDIO_SDIO.bin:system/etc/firmware/mrvl/SDIO8777_SDIO_SDIO.bin \
+    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/revision_ve:system/etc/firmware/mrvl/revision_ve \
+    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/txpwrlimit_cfg.conf:system/etc/firmware/mrvl/txpwrlimit_cfg.conf \
+    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/txpwrlimit_cfg.conf_ve:system/etc/firmware/mrvl/txpwrlimit_cfg.conf_ve \
     vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/w8787_wlan_SDIO_bt_SDIO.bin:system/etc/firmware/mrvl/w8787_wlan_SDIO_bt_SDIO.bin \
     vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/WlanCalData_ext.conf:system/etc/firmware/mrvl/WlanCalData_ext.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/WlanCalData_ext.conf_0:system/etc/firmware/mrvl/WlanCalData_ext.conf_0 \
+    vendor/samsung/lt02wifi/proprietary/system/etc/firmware/mrvl/WlanCalData_ext.conf_ve:system/etc/firmware/mrvl/WlanCalData_ext.conf_ve \
     vendor/samsung/lt02wifi/proprietary/system/etc/permissions/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/permissions/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/permissions/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
@@ -119,6 +124,8 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/etc/lsi3h5_still_tuning.data:system/etc/lsi3h5_still_tuning.data \
     vendor/samsung/lt02wifi/proprietary/system/etc/lsi3h5_video_tuning.data:system/etc/lsi3h5_video_tuning.data \
     vendor/samsung/lt02wifi/proprietary/system/etc/media_profiles.xml_for5640:system/etc/media_profiles.xml_for5640 \
+    vendor/samsung/lt02wifi/proprietary/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    vendor/samsung/lt02wifi/proprietary/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/mrvl_agps_default.conf:system/etc/mrvl_agps_default.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/MSLConfig.txt:system/etc/MSLConfig.txt \
@@ -135,6 +142,9 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/etc/sensor_config.xml:system/etc/sensor_config.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/spn-conf.xml:system/etc/spn-conf.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/Volume.db:system/etc/Volume.db \
+    vendor/samsung/lt02wifi/proprietary/system/etc/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+    vendor/samsung/lt02wifi/proprietary/system/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    vendor/samsung/lt02wifi/proprietary/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     vendor/samsung/lt02wifi/proprietary/system/lib/drm/libdrmwvmplugin.so:system/lib/drm/libdrmwvmplugin.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/egl/libEGL_MRVL.so:system/lib/egl/libEGL_MRVL.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/egl/libGLESv1_CM_MRVL.so:system/lib/egl/libGLESv1_CM_MRVL.so \
@@ -191,6 +201,7 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/lib/libcodecwmadec.so:system/lib/libcodecwmadec.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/libcodecwmvdec.so:system/lib/libcodecwmvdec.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/libcpufreq.so:system/lib/libcpufreq.so \
+     vendor/samsung/lt02wifi/proprietary/system/lib/libcontrolcsc.so:system/lib/libcontrolcsc.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/libcpufreqinterface.so:system/lib/libcpufreqinterface.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/libdrmdecrypt.so:system/lib/libdrmdecrypt.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/libexif_jni.so:system/lib/libexif_jni.so \
@@ -290,4 +301,7 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/xbin/iwpriv:system/xbin/iwpriv \
     vendor/samsung/lt02wifi/proprietary/system/xbin/iwspy:system/xbin/iwspy \
     vendor/samsung/lt02wifi/proprietary/system/xbin/zip:system/xbin/zip \
-    vendor/samsung/lt02wifi/proprietary/system/xbin/zipalign:system/xbin/zipalign
+    vendor/samsung/lt02wifi/proprietary/system/xbin/zipalign:system/xbin/zipalign 
+
+#    vendor/samsung/lt02wifi/proprietary/system/lib/libMarvellWireless.so:system/lib\libMarvellWireless.so \
+#    vendor/samsung/lt02wifi/proprietary/system/bin/MarvellWirelessDaemon:system/bin/MarvellWirelessDaemon 
