@@ -157,6 +157,7 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/audio_path.vc.mrvl.so:system/lib/hw/audio_path.vc.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/audio_path.voip.mrvl.so:system/lib/hw/audio_path.voip.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/audio_path.vt.mrvl.so:system/lib/hw/audio_path.vt.mrvl.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/hw/audio_policy.mrvl.so:system/lib/hw/audio_policy.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/camera.mrvl.so:system/lib/hw/camera.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/consumerir.mrvl.so:system/lib/hw/consumerir.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
@@ -164,6 +165,13 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/hwcomposer.mrvl.so:system/lib/hw/hwcomposer.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/hw/sensors.mrvl.so:system/lib/hw/sensors.mrvl.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libmrvlpreprocessing.so:system/lib/soundfx/libmrvlpreprocessing.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libaudiopreprocessing.so:system/lib/soundfx/libaudiopreprocessing.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libbundlewrapper.so:system/lib/soundfx/libbundlewrapper.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libdownmix.so:system/lib/soundfx/libdownmix.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libeffectproxy.so:system/lib/soundfx/libeffectproxy.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libldnhncr.so:system/lib/soundfx/libldnhncr.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libreverbwrapper.so:system/lib/soundfx/libreverbwrapper.so \
+    vendor/samsung/lt02wifi/proprietary/system/lib/soundfx/libvisualizer.so:system/lib/soundfx/libvisualizer.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/lib_SA_GoogleFX_ver119h.so:system/lib/lib_SA_GoogleFX_ver119h.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/lib_Samsung_Resampler.so:system/lib/lib_Samsung_Resampler.so \
     vendor/samsung/lt02wifi/proprietary/system/lib/lib_Samsung_SB_AM_for_ICS_v04004.so:system/lib/lib_Samsung_SB_AM_for_ICS_v04004.so \
