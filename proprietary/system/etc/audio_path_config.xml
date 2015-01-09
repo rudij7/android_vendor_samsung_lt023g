@@ -41,7 +41,7 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -49,28 +49,38 @@
                 <!-- Register 0x58 0xb7 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40 -->
@@ -153,12 +163,11 @@
                 <!-- Register 0x55 0x20 -->
                 <Register field="RAMP_TIME_SEL[3:0]" value="10"/>
                 <!-- Register 0x26 0x2b -->
-                <!-- KSND Change Left Right Channel -->
                 <Register field="HP2_HIZ" value="0"/>
                 <Register field="HP1_HIZ" value="0"/>
-                <Register field="HP2_IN_SEL[1:0]" value="1"/>
+                <Register field="HP2_IN_SEL[1:0]" value="10"/>
                 <Register field="HP2_EN" value="1"/>
-                <Register field="HP1_IN_SEL[1:0]" value="10"/>
+                <Register field="HP1_IN_SEL[1:0]" value="1"/>
                 <Register field="HP1_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
@@ -169,15 +178,18 @@
                 <Register field="VOL_SEL_1[7:0]"/>
                 <!-- Register 0x57 0xb7 -->
                 <Register field="VOL_SEL_2[7:0]"/>
-                <!-- Register 0x51 0x05-->
+		<!-- Register 0x51 0x05-->
                 <Register field="SRC1I_EN" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="10"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x90 0x7e-->
-                <Register field="LDO_DIG_SEL_1P2" value="0"/>
-                <Register field="REFGEN_FC_TIM[4:0]" value="0"/>
+                <Register field="LDO_DIG_SEL_1P2" value="1"/>
+                <Register field="REFGEN_FC_TIM[4:0]" value="10"/>
                 <Register field="DAC_CURR_REF_EN" value="0"/>
                 <!-- Register 0x26 0x2b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -262,18 +274,17 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
                 <Register field="PDM1_EN" value="1"/>
                 <!-- Register 0x26 0x2b -->
-                <!-- KSND Change Left Right Channel -->
                 <Register field="HP2_HIZ" value="0"/>
                 <Register field="HP1_HIZ" value="0"/>
-                <Register field="HP2_IN_SEL[1:0]" value="1"/>
+                <Register field="HP2_IN_SEL[1:0]" value="10"/>
                 <Register field="HP2_EN" value="1"/>
-                <Register field="HP1_IN_SEL[1:0]" value="10"/>
+                <Register field="HP1_IN_SEL[1:0]" value="1"/>
                 <Register field="HP1_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
@@ -289,30 +300,40 @@
                 <!-- Register 0x51 0x05 -->
                 <Register field="SRC1I_EN" value="1"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
-        </AudioComponent>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
+            </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x90 0x7e-->
-                <Register field="LDO_DIG_SEL_1P2" value="0"/>
-                <Register field="REFGEN_FC_TIM[4:0]" value="0"/>
+                <Register field="LDO_DIG_SEL_1P2" value="1"/>
+                <Register field="REFGEN_FC_TIM[4:0]" value="10"/>
                 <Register field="DAC_CURR_REF_EN" value="0"/>
                 <!-- Register 0x26 0x2b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -329,7 +350,7 @@
                 <Register field="PDM_PAD_MODE[1:0]" value="0"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
                 <Register field="PDM1_EN" value="0"/>
-                <!-- Register 0x30 0xf -->
+                <!-- Register 0x30 0x0 -->
                 <Register field="SAI1_MASTER" value="0"/>
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
@@ -468,16 +489,19 @@
         </Operation>
         <Operation identifier="MUTE"/>
     </AudioPath>
+
     <AudioPath alias="HiFiPlayToSPKR" identifier="VoipPlayToSPKR"/>
     <AudioPath alias="HiFiPlayToHP" identifier="VoipPlayToHP"/>
     <AudioPath alias="HiFiPlayToEarphone" identifier="VoipPlayToEarphone"/>
     <AudioPath alias="HiFiPlayToSPKRAndHP" identifier="VoipPlayToSPKRAndHP"/>
     <AudioPath alias="HiFiPlayToStereoSPKRAndHP" identifier="VoipPlayToStereoSPKRAndHP"/>
+
     <AudioPath alias="HiFiPlayToSPKR" identifier="VTPlayToSPKR"/>
     <AudioPath alias="HiFiPlayToHP" identifier="VTPlayToHP"/>
     <AudioPath alias="HiFiPlayToEarphone" identifier="VTPlayToEarphone"/>
     <AudioPath alias="HiFiPlayToSPKRAndHP" identifier="VTPlayToSPKRAndHP"/>
     <AudioPath alias="HiFiPlayToStereoSPKRAndHP" identifier="VTPlayToStereoSPKRAndHP"/>
+
     <AudioPath identifier="VoicePlayToEarphone">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
@@ -506,7 +530,7 @@
                 <!-- Register 0x38 0x00 -->
                 <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
                 <!-- Register 0x39 0x00 -->
-                <Register field="SAI2CH1_OFFS[7:0]" value="10000"/>
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
                 <!-- Register 0x52 0x68 -->
                 <Register field="VOL_CH_SEL_1[3:0]" value="1111"/>
                 <!-- Register 0x51 0x3f -->
@@ -534,7 +558,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -592,7 +616,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -625,7 +649,7 @@
                 <!-- Register 0x38 0x00 -->
                 <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
                 <!-- Register 0x39 0x00 -->
-                <Register field="SAI2CH1_OFFS[7:0]" value="10000"/>
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
                 <!-- Register 0x3e 0x04 -->
                 <Register field="ST_CH2" value="0"/>
                 <Register field="ST_CH1" value="1"/>
@@ -662,7 +686,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -723,7 +747,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -773,6 +797,15 @@
                 <!-- Register 0x3d 0x01 -->
                 <Register field="SRC2O_CH_SEL_1[3:0]" value="0"/>
                 <Register field="SRC2O_CH_SEL_2[3:0]" value="0"/>
+				<!-- Register 0x60 0x00 -->
+                <Register field="SRC2O_CLIP_2" value="0"/>
+                <Register field="SRC2O_CLIP_1" value="0"/>
+                <Register field="SRC2I_CLIP_2" value="0"/>
+                <Register field="SRC2I_CLIP_1" value="0"/>
+                <Register field="SRC1O_CLIP_2" value="0"/>
+                <Register field="SRC1O_CLIP_1" value="0"/>
+                <Register field="SRC1I_CLIP_2" value="0"/>
+                <Register field="SRC1I_CLIP_1" value="0"/>
                 <!-- Register 0x51 0x2a -->
                 <Register field="SRC2O_EN" value="1"/>
                 <!-- Register 0x12 -->
@@ -787,7 +820,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -852,7 +885,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE">
@@ -907,6 +940,15 @@
                 <!-- Register 0x3d 0x01 -->
                 <Register field="SRC2O_CH_SEL_1[3:0]" value="1"/>
                 <Register field="SRC2O_CH_SEL_2[3:0]" value="1"/>
+                <!-- Register 0x60 0x00 -->
+                <Register field="SRC2O_CLIP_2" value="0"/>
+                <Register field="SRC2O_CLIP_1" value="0"/>
+                <Register field="SRC2I_CLIP_2" value="0"/>
+                <Register field="SRC2I_CLIP_1" value="0"/>
+                <Register field="SRC1O_CLIP_2" value="0"/>
+                <Register field="SRC1O_CLIP_1" value="0"/>
+                <Register field="SRC1I_CLIP_2" value="0"/>
+                <Register field="SRC1I_CLIP_1" value="0"/>
                 <!-- Register 0x51 0x2a -->
                 <Register field="SRC2O_EN" value="1"/>
                 <!-- Register 0x12 -->
@@ -921,7 +963,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -986,7 +1028,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE">
@@ -1059,7 +1101,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -1128,7 +1170,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE">
@@ -1190,7 +1232,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -1241,7 +1283,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE">
@@ -1282,7 +1324,7 @@
                 <!-- Register 0x38 0x00 -->
                 <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
                 <!-- Register 0x39 0x00 -->
-                <Register field="SAI2CH1_OFFS[7:0]" value="10000"/>
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
                 <!-- Register 0x53 0x68-->
                 <Register field="VOL_CH_SEL_3[3:0]" value="1111"/>
                 <!-- Register 0x5b 0x01 -->
@@ -1302,7 +1344,7 @@
                 <!-- Register 0x21 0x40-->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xc9-->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -1310,31 +1352,41 @@
                 <!-- Register 0x58 0xc4 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a-->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="MODEM">
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a-->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x53 0x68-->
@@ -1381,18 +1433,21 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
+                <Register field="CLASSD_GAIN"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="MODEM">
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -1426,7 +1481,7 @@
                 <!-- Register 0x38 0x00 -->
                 <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
                 <!-- Register 0x39 0x00 -->
-                <Register field="SAI2CH1_OFFS[7:0]" value="10000"/>
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
                 <!-- Register 0x52 0x68 -->
                 <Register field="VOL_CH_SEL_1[3:0]" value="1110"/>
                 <Register field="VOL_CH_SEL_2[3:0]" value="1110"/>
@@ -1461,10 +1516,16 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+		<Register field="DIGITAL_GAIN_EXTRA_WB"/>
+            </AudioComponent>
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="90"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="10"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x26 0x2b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -1478,10 +1539,6 @@
                 <Register field="REFGEN_FC_TIM[4:0]" value="10"/>
                 <Register field="DAC_CURR_REF_EN" value="0"/>
                 <!-- Register 0x35 0x0d -->
-                <Register field="SAI2_R_ALIGN" value="0"/>
-                <Register field="SAI2_WLEN[1:0]" value="0"/>
-                <Register field="SAI2_DELAY_MODE" value="0"/>
-                <Register field="SAI2_I2S_MODE" value="0"/>
                 <Register field="SAI2_MASTER" value="0"/>
                 <!-- Register 0x36 0x84 -->
                 <Register field="SAI2_SINGLE_FSYN" value="0"/>
@@ -1522,7 +1579,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -1556,7 +1613,7 @@
                 <!-- Register 0x38 0x00 -->
                 <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
                 <!-- Register 0x39 0x00 -->
-                <Register field="SAI2CH1_OFFS[7:0]" value="10000"/>
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
                 <!-- Register 0x3e 0x04 -->
                 <Register field="ST_CH2" value="0"/>
                 <Register field="ST_CH1" value="1"/>
@@ -1600,10 +1657,16 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+		<Register field="DIGITAL_GAIN_EXTRA_WB"/>
+            </AudioComponent>
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="90"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="10"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x26 0x2b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -1664,7 +1727,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -1731,7 +1794,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -1800,7 +1863,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE">
@@ -1810,7 +1873,124 @@
             </AudioComponent>
         </Operation>
     </AudioPath>
-    <AudioPath alias="VoicePlayToEarphone" identifier="VoiceLoopPlayToEarphone"/>
+    <AudioPath identifier="VoiceLoopPlayToEarphone">
+        <Operation identifier="ENABLE">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
+            </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="ELBA">
+                <!-- Register 0x90 0x7E -->
+                <Register field="LDO_DIG_SEL_1P2" value="1"/>
+                <Register field="REFGEN_FC_TIM[4:0]" value="11111"/>
+                <Register field="DAC_CURR_REF_EN" value="0"/>
+                <!-- Register 0x35 0x0d -->
+                <Register field="SAI2_R_ALIGN" value="0"/>
+                <Register field="SAI2_WLEN[1:0]" value="1"/>
+                <Register field="SAI2_DELAY_MODE" value="1"/>
+                <Register field="SAI2_I2S_MODE" value="0"/>
+                <Register field="SAI2_MASTER" misc="master" value="1"/>
+                <Register field="SAI2_MASTER" misc="slave" value="0"/>
+                <!-- Register 0x36 0x84 -->
+                <Register field="SAI2_SINGLE_FSYN" value="1"/>
+                <Register field="SAI2_FSYN_RATE[3:0]" misc="nbrate" value="0"/>
+                <Register field="SAI2_FSYN_RATE[3:0]" misc="wbrate" value="100"/>
+                <Register field="SAI2_BCLK_OSR[2:0]" value="100"/>
+                <!-- Register 0x37 0x02 -->
+                <Register field="SAI2_PD_ON_CH0" value="0"/>
+                <Register field="SAI2_FSYN_VAL[1]" value="0"/>
+                <Register field="SAI2_FSYN_VAL[0]" value="0"/>
+                <Register field="SAI2_BCLK_INV" value="1"/>
+                <Register field="SAI2_FSYN_INV" value="0"/>
+                <!-- Register 0x38 0x00 -->
+                <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
+                <!-- Register 0x39 0x00 -->
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
+                <!-- Register 0x52 0x68 -->
+                <Register field="VOL_CH_SEL_1[3:0]" value="1111"/>
+                <!-- Register 0x51 0x3f -->
+                <Register field="SRC2I_EN" value="1"/>
+                <Register field="SAI2_EN" value="1"/>
+                <!-- Register 0x5b 0x01 -->
+                <Register field="COEFF_FILT_ADDR[4:0]" value="1"/>
+                <!-- Register 0x5c mixer coeff -->
+                <Register field="COEFFICIENT_MEMORY_ACCESS"/>
+                <!-- Register 0x50 0x0f -->
+                <Register field="ZCDET_EN" value="0"/>
+                <Register field="MIX_EQ_EN" value="1"/>
+                <Register field="PRC_EN" value="1"/>
+                <Register field="OVS_EN" value="1"/>
+                <!-- Register 0x29 0x0b -->
+                <Register field="EP_HIGHGAIN"/>
+                <Register field="EAR_IN_SEL[1:0]" value="1"/>
+                <Register field="EAR_EN" value="1"/>
+                <!-- Register 0x56 0xB7 -->
+                <Register field="VOL_SEL_1[7:0]"/>
+            </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="MODEM">
+                <Register field="DIGITAL_GAIN_NB"/>
+                <Register field="DIGITAL_GAIN_WB"/>
+            </AudioComponent>
+        </Operation>
+        <Operation identifier="DISABLE">
+            <AudioComponent control_protocol="I2C" identifier="ELBA">
+                <!-- Register 0x29 0x0b -->
+                <Register field="EP_HIGHGAIN"/>
+                <Register field="EAR_IN_SEL[1:0]" value="0"/>
+                <Register field="EAR_EN" value="0"/>
+                <!-- Register 0x90 0x7E -->
+                <Register field="LDO_DIG_SEL_1P2" value="1"/>
+                <Register field="REFGEN_FC_TIM[4:0]" value="10"/>
+                <Register field="DAC_CURR_REF_EN" value="0"/>
+                <!-- Register 0x35 0x0d -->
+                <Register field="SAI2_R_ALIGN" value="0"/>
+                <Register field="SAI2_WLEN[1:0]" value="0"/>
+                <Register field="SAI2_DELAY_MODE" value="0"/>
+                <Register field="SAI2_I2S_MODE" value="0"/>
+                <Register field="SAI2_MASTER" value="0"/>
+                <!-- Register 0x36 0x84 -->
+                <Register field="SAI2_SINGLE_FSYN" value="0"/>
+                <Register field="SAI2_FSYN_RATE[3:0]" value="0"/>
+                <Register field="SAI2_BCLK_OSR[2:0]" value="0"/>
+                <!-- Register 0x37 0x02 -->
+                <Register field="SAI2_PD_ON_CH0" value="0"/>
+                <Register field="SAI2_FSYN_VAL[1]" value="0"/>
+                <Register field="SAI2_FSYN_VAL[0]" value="0"/>
+                <Register field="SAI2_BCLK_INV" value="0"/>
+                <Register field="SAI2_FSYN_INV" value="0"/>
+                <!-- Register 0x38 0x00 -->
+                <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
+                <!-- Register 0x39 0x00 -->
+                <Register field="SAI2CH1_OFFS[7:0]" value="0"/>
+                <!-- Register 0x52 0x68 -->
+                <Register field="VOL_CH_SEL_1[3:0]" value="0"/>
+                <!-- Register 0x51 0x3f -->
+                <Register field="SRC2I_EN" value="0"/>
+                <Register field="SAI2_EN" value="0"/>
+                <!-- Register 0x50 0x0f -->
+                <Register field="ZCDET_EN" value="0"/>
+                <Register field="MIX_EQ_EN" value="0"/>
+                <Register field="PRC_EN" value="0"/>
+                <Register field="OVS_EN" value="0"/>
+            </AudioComponent>
+        </Operation>
+        <Operation identifier="SETVOLUME">
+            <AudioComponent control_protocol="I2C" identifier="ELBA">
+                <!-- Register 0x56 -->
+                <Register field="VOL_SEL_1[7:0]"/>
+                <!-- Register 0x29 -->
+                <Register field="EP_HIGHGAIN"/>
+            </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="MODEM">
+                <Register field="DIGITAL_GAIN_NB"/>
+                <Register field="DIGITAL_GAIN_WB"/>
+            </AudioComponent>
+        </Operation>
+        <Operation identifier="MUTE"/>
+    </AudioPath>
     <AudioPath alias="VoiceRecordFromMic1" identifier="VoiceLoopRecordFromMic1"/>
     <AudioPath alias="VoiceRecordFromMic2" identifier="VoiceLoopRecordFromMic2"/>
     <AudioPath alias="VoiceRecordFromDualMic" identifier="VoiceLoopRecordFromDualMic"/>
@@ -1838,10 +2018,10 @@
                 <Register field="SAI2_I2S_MODE" value="1"/>
                 <Register field="SAI2_MASTER" misc="master" value="1"/>
                 <Register field="SAI2_MASTER" misc="slave" value="0"/>
-                <!-- Register 0x36 0x4c -->
+                <!-- Register 0x36 0x49 -->
                 <Register field="SAI2_SINGLE_FSYN" value="0"/>
                 <Register field="SAI2_FSYN_RATE[3:0]" value="1001"/>
-                <Register field="SAI2_BCLK_OSR[2:0]" value="100"/>
+                <Register field="SAI2_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x37 0x08 -->
                 <Register field="SAI2_PD_ON_CH0" value="0"/>
                 <Register field="SDO2_HIZ_DIS" value="0"/>
@@ -1887,8 +2067,14 @@
                 <!-- Register 0x51 0x0a -->
                 <Register field="SRC2I_EN" value="1"/>
             </AudioComponent>
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="90"/>
+            </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="10"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x26 0x1b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -1959,11 +2145,6 @@
     <AudioPath identifier="FMPlayToHPAnalog">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
-                <!-- Register 0x56 0x0 -->
-                <Register field="VOL_SEL_1[7:0]" value="0"/>
-                <!-- Register 0x57 0x0 -->
-                <Register field="VOL_SEL_2[7:0]" value="0"/>
-                <!-- Register 0x26 0x1b -->
                 <Register field="HP2_HIZ" value="0"/>
                 <Register field="HP1_HIZ" value="0"/>
                 <Register field="HP2_IN_SEL[1:0]" value="10"/>
@@ -2017,18 +2198,19 @@
                 <Register field="HP2_EN" value="1"/>
                 <Register field="HP1_IN_SEL[1:0]" value="1"/>
                 <Register field="HP1_EN" value="1"/>
-           </AudioComponent>
-           <AudioComponent control_protocol="SLEEP" identifier="DELAY">
-                <Delay value="100"/>
-            </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x56 0xB7 -->
                 <Register field="VOL_SEL_1[7:0]"/>
                 <!-- Register 0x57 0xB7 -->
                 <Register field="VOL_SEL_2[7:0]"/>
             </AudioComponent>
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="90"/>
+            </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
+            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
+                <Delay value="10"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x26 0x1b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -2051,7 +2233,7 @@
                 <!-- Register 0x14 0xaa -->
                 <Register field="AUXPGA2_GAIN[3:0]" value="0"/>
                 <Register field="AUXPGA1_GAIN[3:0]" value="0"/>
-                <!-- Register 0x16 0x0 -->
+                <!-- Register 0x16 0x51 -->
                 <Register field="EXTMIC_BIAS" value="0"/>
                 <Register field="DWS1_IN_SEL[2:0]" value="0"/>
                 <Register field="DWS2_IN_SEL[2:0]" value="0"/>
@@ -2088,9 +2270,6 @@
         </Operation>
         <Operation identifier="SETVOLUME">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
-                <!-- Register 0x16 0x0 -->
-                <Register field="DWS2_IN_SEL[2:0]" value="10"/>
-                <Register field="DWS1_IN_SEL[2:0]" value="1"/>
                 <Register field="VOL_SEL_1[7:0]"/>
                 <Register field="VOL_SEL_2[7:0]"/>
             </AudioComponent>
@@ -2099,9 +2278,6 @@
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <Register field="VOL_SEL_1[7:0]" value="0"/>
                 <Register field="VOL_SEL_2[7:0]" value="0"/>
-                <!-- Register 0x16 0x0 -->
-                <Register field="DWS2_IN_SEL[2:0]" value="0"/>
-                <Register field="DWS1_IN_SEL[2:0]" value="0"/>
             </AudioComponent>
         </Operation>
     </AudioPath>
@@ -2158,7 +2334,7 @@
                 <!-- Register 0x21 0x40-->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xc1-->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -2166,25 +2342,35 @@
                 <!-- Register 0x58 0xc4 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40-->
@@ -2257,6 +2443,20 @@
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <Register field="VOL_SEL_3[7:0]" value="0"/>
             </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
+                <!-- Register 0x48 -->
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
+                <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x14 0xaa -->
                 <Register field="AUXPGA2_GAIN[3:0]" value="1010"/>
@@ -2300,7 +2500,7 @@
                 <!-- Register 0x21 0x40-->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xc1-->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -2308,25 +2508,21 @@
                 <!-- Register 0x58 0xc4 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
-                <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
-                <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
-            </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x5b 0x01 -->
@@ -2432,7 +2628,7 @@
                 <Register field="SAI1_FSYN_VAL[0]" value="0"/>
                 <!-- Register 0x3c 0xAC -->
                 <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -2458,8 +2654,8 @@
                 <Register field="SRC1O_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x3c 0xAC -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
+                <Register field="SRC1O_CH_SEL_1[3:0]" value="0000"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="0001"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -2478,7 +2674,7 @@
                 <Register field="SAI1_FSYN_VAL[0]" value="0"/>
                 <!-- Register 0x3c 0xAC -->
                 <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -2518,6 +2714,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -2536,7 +2733,7 @@
                 <Register field="MICPGA1_GAIN[4:0]"/>
                 <!-- Register 0x13 -->
                 <Register field="MICPGA2_GAIN[4:0]"/>
-            </AudioComponent>
+             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="15"/>
             </AudioComponent>
@@ -2650,6 +2847,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -2666,7 +2864,7 @@
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]"/>
-            </AudioComponent>
+             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="15"/>
             </AudioComponent>
@@ -2742,7 +2940,7 @@
             </AudioComponent>
         </Operation>
     </AudioPath>
-    <AudioPath identifier="HiFiRecordFromMic2">
+ 	<AudioPath identifier="HiFiRecordFromMic2">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x11 0x00 -->
@@ -2775,6 +2973,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -2789,9 +2988,9 @@
                 <!-- Register 0x51 0x15 -->
                 <Register field="SRC1O_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
-                <!-- Register 0x13 -->
+                <!-- Register 0x12 -->
                 <Register field="MICPGA2_GAIN[4:0]"/>
-            </AudioComponent>
+             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="15"/>
             </AudioComponent>
@@ -2889,6 +3088,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -2986,6 +3186,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -3007,9 +3208,6 @@
                 <Register field="MIX_EQ_EN" value="1"/>
                 <Register field="PRC_EN" value="1"/>
                 <Register field="DWS_EN" value="1"/>
-            </AudioComponent>
-            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
-                <Delay value="200"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
@@ -3073,9 +3271,16 @@
             </AudioComponent>
         </Operation>
     </AudioPath>
+
     <AudioPath alias="HiFiRecordFromDualMic" identifier="HiFiRecognitionRecordFromDualMic"/>
+    <AudioPath alias="HiFiRecordFromMic1" identifier="HiFiRecognitionRecordSecFromMic1"/>
+    <AudioPath alias="HiFiRecordFromMic1" identifier="HiFiRecognitionRecordDrivingFromMic1"/>
     <AudioPath alias="HiFiRecordFromMic1" identifier="HiFiRecognitionRecordFromMic1"/>
+    <AudioPath alias="HiFiRecordFromMic2" identifier="HiFiRecognitionRecordSecFromMic2"/>
+    <AudioPath alias="HiFiRecordFromMic2" identifier="HiFiRecognitionRecordDrivingFromMic2"/>
     <AudioPath alias="HiFiRecordFromMic2" identifier="HiFiRecognitionRecordFromMic2"/>
+    <AudioPath alias="HiFiRecordFromHsMic" identifier="HiFiRecognitionRecordSecFromHsMic"/>
+    <AudioPath alias="HiFiRecordFromHsMic" identifier="HiFiRecognitionRecordDrivingFromHsMic"/>
     <AudioPath alias="HiFiRecordFromHsMic" identifier="HiFiRecognitionRecordFromHsMic"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VoipWBRecordFromDualMic"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VoipNBRecordFromDualMic"/>
@@ -3103,24 +3308,25 @@
     <AudioPath alias="HiFiRecordFromDMic" identifier="VoipNBRecordFromDMic(Headphone Mode)"/>
     <AudioPath alias="HiFiRecordFromHsMic" identifier="VoipWBRecordFromHsMic"/>
     <AudioPath alias="HiFiRecordFromHsMic" identifier="VoipNBRecordFromHsMic"/>
+
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VTWBRecordFromDualMic"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VTNBRecordFromDualMic"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VTWBRecordFromDualMic(Speaker Mode)"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VTNBRecordFromDualMic(Speaker Mode)"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VTWBRecordFromDualMic(Headphone Mode)"/>
     <AudioPath alias="HiFiRecordFromDualMic" identifier="VTNBRecordFromDualMic(Headphone Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic1" identifier="VTWBRecordFromMic1"/>
-    <AudioPath alias="HiFiRecordFromMic1" identifier="VTNBRecordFromMic1"/>
-    <AudioPath alias="HiFiRecordFromMic1" identifier="VTWBRecordFromMic1(Speaker Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic1" identifier="VTNBRecordFromMic1(Speaker Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic1" identifier="VTWBRecordFromMic1(Headphone Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic1" identifier="VTNBRecordFromMic1(Headphone Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic2" identifier="VTWBRecordFromMic2"/>
-    <AudioPath alias="HiFiRecordFromMic2" identifier="VTNBRecordFromMic2"/>
-    <AudioPath alias="HiFiRecordFromMic2" identifier="VTWBRecordFromMic2(Speaker Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic2" identifier="VTNBRecordFromMic2(Speaker Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic2" identifier="VTWBRecordFromMic2(Headphone Mode)"/>
-    <AudioPath alias="HiFiRecordFromMic2" identifier="VTNBRecordFromMic2(Headphone Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic1"    identifier="VTWBRecordFromMic1"/>
+    <AudioPath alias="HiFiRecordFromMic1"    identifier="VTNBRecordFromMic1"/>
+    <AudioPath alias="HiFiRecordFromMic1"    identifier="VTWBRecordFromMic1(Speaker Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic1"    identifier="VTNBRecordFromMic1(Speaker Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic1"    identifier="VTWBRecordFromMic1(Headphone Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic1"    identifier="VTNBRecordFromMic1(Headphone Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic2"    identifier="VTWBRecordFromMic2"/>
+    <AudioPath alias="HiFiRecordFromMic2"    identifier="VTNBRecordFromMic2"/>
+    <AudioPath alias="HiFiRecordFromMic2"    identifier="VTWBRecordFromMic2(Speaker Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic2"    identifier="VTNBRecordFromMic2(Speaker Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic2"    identifier="VTWBRecordFromMic2(Headphone Mode)"/>
+    <AudioPath alias="HiFiRecordFromMic2"    identifier="VTNBRecordFromMic2(Headphone Mode)"/>
     <AudioPath alias="HiFiRecordFromDMic" identifier="VTWBRecordFromDMic"/>
     <AudioPath alias="HiFiRecordFromDMic" identifier="VTNBRecordFromDMic"/>
     <AudioPath alias="HiFiRecordFromDMic" identifier="VTWBRecordFromDMic(Speaker Mode)"/>
@@ -3129,6 +3335,8 @@
     <AudioPath alias="HiFiRecordFromDMic" identifier="VTNBRecordFromDMic(Headphone Mode)"/>
     <AudioPath alias="HiFiRecordFromHsMic" identifier="VTWBRecordFromHsMic"/>
     <AudioPath alias="HiFiRecordFromHsMic" identifier="VTNBRecordFromHsMic"/>
+
+
     <AudioPath identifier="HiFiPlayToStereoSPKR">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
@@ -3160,14 +3368,15 @@
                 <!-- Register 0x5c mixer coeff -->
                 <Register field="COEFFICIENT_MEMORY_ACCESS"/>
                 <!-- Register 0x55 0x20 -->
-                <Register field="RAMP_TIME_SEL[3:0]" value="10"/>
+                <Register field="RAMP_TIME_SEL[3:0]" value="1"/>
+                <Register field="AUTOMUTE_MODE_PDM[1:0]" value="0"/>
                 <!-- Register 0x58 0x00 -->
-                <Register field="VOL_SEL_3[7:0]" value="0"/>
+                <Register field="VOL_SEL_3[7:0]"/>
                 <!-- Register 0x59 0x00 -->
-                <Register field="VOL_SEL_4[7:0]" value="0"/>
-                <!-- Register 0x20 0xE8 -->
+                <Register field="VOL_SEL_4[7:0]"/>
+                <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
-                <Register field="PDM2_DIS_MODE[1:0]" value="0"/>
+                <Register field="PDM2_DIS_MODE[1:0]" value="10"/>
                 <Register field="PDM2_EN" value="1"/>
                 <!-- Register 0x50 0x0f -->
                 <Register field="ZCDET_EN" value="0"/>
@@ -3180,51 +3389,45 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
-                <!-- Register 0x25 0xAC -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="10101100"/>
-                <!-- Register 0x23 0x7A -->
-                <Register field="PDM_CTRL_GO" value="1"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="111"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="1"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0xD8 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
-                <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
-                <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
+                <!-- Register 0x48 --><!-- LT02 Use Stereo Speaker KSND -->
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
-                <Delay value="29"/>
+                <Delay value="28"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
-                <!-- Register 0x58 0xb7 -->
-                <Register field="VOL_SEL_3[7:0]"/>
-                <!-- Register 0x59 0xb7 -->
-                <Register field="VOL_SEL_4[7:0]"/>
-                <!-- Register 0x20 0xE9 -->
-                <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
+                <!-- Register 0x20 0xC9 -->
+                <Register field="PDM1_DIS_MODE[1:0]" value="10"/>
                 <Register field="PDM1_EN" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40 -->
@@ -3263,24 +3466,18 @@
                 <Register field="MIX_EQ_EN" value="0"/>
                 <Register field="PRC_EN" value="0"/>
                 <Register field="OVS_EN" value="0"/>
-                <!-- Register 0x55 0x0 -->
+                <!-- Register 0x55 0x20 -->
                 <Register field="RAMP_TIME_SEL[3:0]" value="0"/>
-                <!-- Register 0x23 0x0 -->
-                <Register field="PDM_CTRL_GO" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="0"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0x0 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
+                <Register field="AUTOMUTE_MODE_PDM[1:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME"/>
         <Operation identifier="MUTE"/>
     </AudioPath>
+
     <AudioPath alias="HiFiPlayToStereoSPKR" identifier="VoipPlayToStereoSPKR"/>
     <AudioPath alias="HiFiPlayToStereoSPKR" identifier="VTPlayToStereoSPKR"/>
+
     <AudioPath identifier="HiFiPlayToStereoSPKRAndHP">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
@@ -3328,7 +3525,7 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM2_DIS_MODE[1:0]" value="0"/>
@@ -3342,11 +3539,6 @@
                 <Register field="HP2_EN" value="1"/>
                 <Register field="HP1_IN_SEL[1:0]" value="1"/>
                 <Register field="HP1_EN" value="1"/>
-            </AudioComponent>
-            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
-                <Delay value="100"/>
-            </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x56 0xb7 -->
                 <Register field="VOL_SEL_1[7:0]"/>
                 <!-- Register 0x57 0xb7 -->
@@ -3357,38 +3549,42 @@
                 <Register field="VOL_SEL_4[7:0]"/>
                 <!-- Register 0x51 0x05 -->
                 <Register field="SRC1I_EN" value="1"/>
-                <!-- Register 0x25 0xAC -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="10101100"/>
-                <!-- Register 0x23 0x7A -->
-                <Register field="PDM_CTRL_GO" value="1"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="111"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="1"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0xD8 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
-                <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
-                <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
+                <!-- Register 0x48 --><!-- LT02 Use Stereo Speaker KSND -->
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="ELBA">
+                <!-- Register 0x58 0x00 -->
+                <Register field="VOL_SEL_3[7:0]" value="0"/>
+                <!-- Register 0x59 0x00 -->
+                <Register field="VOL_SEL_4[7:0]" value="0"/>
+            </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x90 0x7e-->
@@ -3441,15 +3637,6 @@
                 <Register field="OVS_EN" value="0"/>
                 <!-- Register 0x55 0x0 -->
                 <Register field="RAMP_TIME_SEL[3:0]" value="0"/>
-                <!-- Register 0x23 0x0 -->
-                <Register field="PDM_CTRL_GO" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="0"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0x0 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME">
@@ -3500,7 +3687,7 @@
                 <!-- Register 0x38 0x00 -->
                 <Register field="SAI2CH0_OFFS[7:0]" value="0"/>
                 <!-- Register 0x39 0x00 -->
-                <Register field="SAI2CH1_OFFS[7:0]" value="10000"/>
+                <Register field="SAI2CH1_OFFS[7:0]" value="00010000"/>
                 <!-- Register 0x53 0x68-->
                 <Register field="VOL_CH_SEL_3[3:0]" value="1110"/>
                 <Register field="VOL_CH_SEL_4[3:0]" value="1110"/>
@@ -3510,6 +3697,8 @@
                 <Register field="COEFFICIENT_MEMORY_ACCESS"/>
                 <!-- Register 0x55 0x20 -->
                 <Register field="RAMP_TIME_SEL[3:0]" value="10"/>
+                <Register field="AUTOMUTE_MODE_SDM[1:0]" value="0"/>
+                <Register field="AUTOMUTE_MODE_PDM[1:0]" value="0"/>
                 <!-- Register 0x58 0x00 -->
                 <Register field="VOL_SEL_3[7:0]" value="0"/>
                 <!-- Register 0x59 0x00 -->
@@ -3531,28 +3720,21 @@
                 <!-- Register 0x21 0x40-->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
-                <!-- Register 0x25 0xAC -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="10101100"/>
-                <!-- Register 0x23 0x7A -->
-                <Register field="PDM_CTRL_GO" value="1"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="111"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="1"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0xD8 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
-                <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="1"/>
+                <Register field="PDM_LR_SEL" value="10"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a-->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="10"/>
@@ -3570,24 +3752,23 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="ELBA">
-                <!-- Register 0x58 0x00 -->
-                <Register field="VOL_SEL_3[7:0]" value="0"/>
-                <!-- Register 0x59 0x00 -->
-                <Register field="VOL_SEL_4[7:0]" value="0"/>
-            </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a-->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40-->
@@ -3632,17 +3813,10 @@
                 <Register field="MIX_EQ_EN" value="0"/>
                 <Register field="PRC_EN" value="0"/>
                 <Register field="OVS_EN" value="0"/>
-                <!-- Register 0x55 0x0 -->
+                <!-- Register 0x55 0x20 -->
                 <Register field="RAMP_TIME_SEL[3:0]" value="0"/>
-                <!-- Register 0x23 0x0 -->
-                <Register field="PDM_CTRL_GO" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="0"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0x0 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
+                <Register field="AUTOMUTE_MODE_SDM[1:0]" value="0"/>
+                <Register field="AUTOMUTE_MODE_PDM[1:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME">
@@ -3650,11 +3824,14 @@
                 <Register field="VOL_SEL_3[7:0]"/>
                 <Register field="VOL_SEL_4[7:0]"/>
             </AudioComponent>
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
+                <Register field="CLASSD_GAIN"/>
+            </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="MODEM">
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE">
@@ -3717,7 +3894,7 @@
                 <!-- Register 0x21 0x40-->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xc1-->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM2_DIS_MODE[1:0]" value="0"/>
@@ -3728,38 +3905,36 @@
                 <Register field="VOL_SEL_3[7:0]"/>
                 <!-- Register 0x59 0xc4 -->
                 <Register field="VOL_SEL_4[7:0]"/>
-                <!-- Register 0x25 0xAC -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="10101100"/>
-                <!-- Register 0x23 0x7A -->
-                <Register field="PDM_CTRL_GO" value="1"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="111"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="1"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0xD8 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
-                <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x90 0x7E -->
@@ -3814,15 +3989,6 @@
                 <Register field="COEFF_FILT_ADDR[4:0]" value="1"/>
                 <!-- Register 0x5c mixer coeff -->
                 <Register field="COEFFICIENT_MEMORY_ACCESS"/>
-                <!-- Register 0x23 0x0 -->
-                <Register field="PDM_CTRL_GO" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="0"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0x0 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME">
@@ -3884,7 +4050,7 @@
                 <!-- Register 0x21 0x40-->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xc1-->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM2_DIS_MODE[1:0]" value="0"/>
@@ -3895,38 +4061,36 @@
                 <Register field="VOL_SEL_3[7:0]"/>
                 <!-- Register 0x59 0xc4 -->
                 <Register field="VOL_SEL_4[7:0]"/>
-                <!-- Register 0x25 0xAC -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="10101100"/>
-                <!-- Register 0x23 0x7A -->
-                <Register field="PDM_CTRL_GO" value="1"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="111"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="1"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0xD8 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
-                <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40-->
@@ -3979,15 +4143,6 @@
                 <Register field="COEFF_FILT_ADDR[4:0]" value="1"/>
                 <!-- Register 0x5c mixer coeff -->
                 <Register field="COEFFICIENT_MEMORY_ACCESS"/>
-                <!-- Register 0x23 0x0 -->
-                <Register field="PDM_CTRL_GO" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
-                <Register field="PDM_CTRL_16BIT_EN" value="0"/>
-                <Register field="PDM_CTRL_DIS1" value="0"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
-                <!-- Register 0x25 0x0 -->
-                <Register field="PDM_CTRL_PATT_LSB[7:0]" value="0"/>
-                <Register field="PDM_CTRL_REP[2:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME">
@@ -4009,7 +4164,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE"/>
@@ -4018,7 +4173,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -4030,7 +4185,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE"/>
@@ -4039,7 +4194,7 @@
                 <Register field="DIGITAL_GAIN_NB"/>
                 <Register field="DIGITAL_GAIN_EXTRA"/>
                 <Register field="DIGITAL_GAIN_WB"/>
-                <Register field="DIGITAL_GAIN_WB_EXTRA"/>
+                <Register field="DIGITAL_GAIN_EXTRA_WB"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="MUTE"/>
@@ -4062,6 +4217,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -4085,43 +4241,31 @@
                 <Register field="PRC_EN" value="1"/>
                 <Register field="OVS_EN" value="1"/>
                 <!-- Register 0x26 0x2b -->
-                <!-- KSND Change Left Right Channel -->
                 <Register field="HP2_HIZ" value="0"/>
                 <Register field="HP1_HIZ" value="0"/>
-                <Register field="HP2_IN_SEL[1:0]" value="1"/>
+                <Register field="HP2_IN_SEL[1:0]" value="10"/>
                 <Register field="HP2_EN" value="1"/>
-                <Register field="HP1_IN_SEL[1:0]" value="10"/>
+                <Register field="HP1_IN_SEL[1:0]" value="1"/>
                 <Register field="HP1_EN" value="1"/>
                 <!-- Register 0x56 0xb7 -->
                 <Register field="VOL_SEL_1[7:0]"/>
                 <!-- Register 0x57 0xb7 -->
                 <Register field="VOL_SEL_2[7:0]"/>
-            <!-- Register 0x8C 0x40 -->
+                <!-- Register 0x8C 0x40 -->
                 <Register field="HP_LO" value="1"/>
             </AudioComponent>
-            <AudioComponent control_protocol="SLEEP" identifier="DELAY">
-                <Delay value="10"/>
-            </AudioComponent>
-            <AudioComponent control_protocol="GPIO" identifier="GPIO_PORT">
-                <!-- GPIO Port5 0 -->
-                <GPIO name="GPIO5" port="5" value="0"/>
-                </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="90"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="GPIO" identifier="GPIO_PORT">
-                <!-- GPIO Port5 1 -->
-                <GPIO name="GPIO5" port="5" value="1"/>
-            </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="10"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x90 0x7e-->
-                <Register field="LDO_DIG_SEL_1P2" value="0"/>
-                <Register field="REFGEN_FC_TIM[4:0]" value="0"/>
+                <Register field="LDO_DIG_SEL_1P2" value="1"/>
+                <Register field="REFGEN_FC_TIM[4:0]" value="10"/>
                 <Register field="DAC_CURR_REF_EN" value="0"/>
                 <!-- Register 0x26 0x2b -->
                 <Register field="HP2_HIZ" value="0"/>
@@ -4157,14 +4301,14 @@
                 <Register field="MIX_EQ_EN" value="0"/>
                 <Register field="PRC_EN" value="0"/>
                 <Register field="OVS_EN" value="0"/>
-            	<!-- Register 0x8C 0x40 -->
+            <!-- Register 0x8C 0x40 -->
                 <Register field="HP_LO" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME"/>
         <Operation identifier="MUTE"/>
     </AudioPath>
-<AudioPath alias="HiFiPlayToDock" identifier="VoipPlayToDock"/>
+    <AudioPath alias="HiFiPlayToDock" identifier="VoipPlayToDock"/>
 <AudioPath identifier="HsMicLoopPlayToHP">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
@@ -4213,6 +4357,9 @@
                 <Register field="SRC1O_EN" value="1"/>
                 <Register field="SRC1I_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
+				<!-- Register 0x3c 0x01 -->
+                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]"/>
                 <!-- Register 0x50 0x07 -->
@@ -4221,11 +4368,6 @@
                 <Register field="PRC_EN" value="1"/>
                 <Register field="DWS_EN" value="1"/>
                 <Register field="OVS_EN" value="1"/>
-                <!-- Register 0x3c 0x0 -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
-                <!-- Register 0x55 0x20 -->
-                <Register field="RAMP_TIME_SEL[3:0]" value="10"/>
                 <!-- Register 0x52 0x68 -->
                 <Register field="VOL_CH_SEL_1[3:0]" value="1110"/>
                 <Register field="VOL_CH_SEL_2[3:0]" value="1110"/>
@@ -4250,6 +4392,7 @@
                 <Register field="DAC_CURR_REF_EN" value="0"/>
                 <!-- Register 0x51 0x00 -->
                 <Register field="SRC1O_EN" value="0"/>
+                <Register field="SRC1I_EN" value="0"/>
                 <Register field="SAI1_EN" value="0"/>
                 <!-- Register 0x56 0xb7 -->
                 <Register field="VOL_SEL_1[7:0]" value="0"/>
@@ -4274,6 +4417,10 @@
                 <Register field="MIC_CLK_PD" value="1"/>
                 <Register field="ADC12_DIV3" value="0"/>
                 <!-- Register 0x30 0xf -->
+				<Register field="SAI1_R_ALIGN" value="0"/>
+                <Register field="SAI1_WLEN[1:0]" value="0"/>
+                <Register field="SAI1_DELAY_MODE" value="0"/>
+                <Register field="SAI1_I2S_MODE" value="0"/>
                 <Register field="SAI1_MASTER" value="0"/>
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
@@ -4286,6 +4433,9 @@
                 <Register field="SAI1_FSYN_VAL[0]" value="0"/>
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
+                <!-- Register 0x3c 0x01 -->
+                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]"/>
                 <!-- Register 0x26 0x2b -->
@@ -4303,17 +4453,12 @@
                 <Register field="MIX_EQ_EN" value="0"/>
                 <Register field="PRC_EN" value="0"/>
                 <Register field="OVS_EN" value="0"/>
-                <!-- Register 0x3c 0x01 -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
-                <!-- Register 0x55 0x0 -->
-                <Register field="RAMP_TIME_SEL[3:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME"/>
         <Operation identifier="MUTE"/>
     </AudioPath>
-    <AudioPath identifier="Mic1LoopPlayToHP">
+        <AudioPath identifier="Mic1LoopPlayToHP">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x90 0x7e-->
@@ -4359,7 +4504,7 @@
                 <Register field="SAI1_FSYN_VAL[0]" value="1"/>
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
-                <!-- Register 0x3c 0x01 -->
+		<!-- Register 0x3c 0x00 -->
                 <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
                 <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
                 <!-- Register 0x51 0x01-->
@@ -4368,18 +4513,17 @@
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]"/>
+                <!-- Register 0x5c mixer coeff -->
+                <Register field="COEFFICIENT_MEMORY_ACCESS"/>
                 <!-- Register 0x50 0x07 -->
                 <Register field="ZCDET_EN" value="0"/>
                 <Register field="MIX_EQ_EN" value="1"/>
                 <Register field="PRC_EN" value="1"/>
                 <Register field="DWS_EN" value="1"/>
                 <Register field="OVS_EN" value="1"/>
-                <!-- Register 0x3c 0x0 -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
                 <!-- Register 0x52 0x68 -->
-                <Register field="VOL_CH_SEL_1[3:0]" value="0100"/>
-                <Register field="VOL_CH_SEL_2[3:0]" value="0100"/>
+                <Register field="VOL_CH_SEL_1[3:0]" value="1110"/>
+                <Register field="VOL_CH_SEL_2[3:0]" value="1110"/>
                 <!-- Register 0x26 0x2b -->
                 <Register field="HP2_HIZ" value="0"/>
                 <Register field="HP1_HIZ" value="0"/>
@@ -4399,7 +4543,7 @@
                 <Register field="LDO_DIG_SEL_1P2" value="0"/>
                 <Register field="REFGEN_FC_TIM[4:0]" value="0"/>
                 <Register field="DAC_CURR_REF_EN" value="0"/>
-                <!-- Register 0x3c 0x01 -->
+                <!-- Register 0x3c 0x00 -->
                 <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
                 <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
                 <!-- Register 0x51 0x00 -->
@@ -4464,9 +4608,8 @@
                 <Register field="MIX_EQ_EN" value="0"/>
                 <Register field="PRC_EN" value="0"/>
                 <Register field="OVS_EN" value="0"/>
-                <!-- Register 0x3c 0x01 -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
+                <!-- Register 0x55 0x0 -->
+                <Register field="RAMP_TIME_SEL[3:0]" value="0"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="SETVOLUME"/>
@@ -4518,16 +4661,15 @@
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x3c 0x01 -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="10"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="11"/>
+                <Register field="SRC1O_CH_SEL_1[3:0]" value="0010"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="0011"/>
                 <!-- Register 0x52 0x68 -->
-                <Register field="VOL_CH_SEL_1[3:0]" value="100"/>
-                <Register field="VOL_CH_SEL_2[3:0]" value="100"/>
+                <Register field="VOL_CH_SEL_1[3:0]" value="1111"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]"/>
                 <!-- Register 0x51 0x3f --><!-- Fix me: enable SAI2 is a workaround for the HiFi2Earphone sound during voice call-->
-                <Register field="SRC1O_EN" value="0"/>
-                <Register field="SRC1I_EN" value="0"/>
+                <Register field="SRC1O_EN" value="1"/>
+                <Register field="SRC1I_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x29 0x0b -->
                 <Register field="EP_HIGHGAIN" value="1"/>
@@ -4537,7 +4679,7 @@
                 <Register field="VOL_SEL_1[7:0]"/>
                 <!-- Register 0x50 0x0f -->
                 <Register field="ZCDET_EN" value="0"/>
-                <Register field="MIX_EQ_EN" value="0"/>
+                <Register field="MIX_EQ_EN" value="1"/>
                 <Register field="PRC_EN" value="1"/>
                 <Register field="DWS_EN" value="1"/>
                 <Register field="OVS_EN" value="1"/>
@@ -4597,7 +4739,6 @@
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x52 0x68 -->
                 <Register field="VOL_CH_SEL_1[3:0]" value="0"/>
-                <Register field="VOL_CH_SEL_2[3:0]" value="0"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]" value="0"/>
                 <!-- Register 0x56 0xB7 -->
@@ -4615,7 +4756,7 @@
         <Operation identifier="SETVOLUME"/>
         <Operation identifier="MUTE"/>
     </AudioPath>
-    <AudioPath identifier="Mic1LoopPlayToSPKR">
+    <AudioPath identifier="Mic1LoopPlayToSPRK">
         <Operation identifier="ENABLE">
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x11 0x00 -->
@@ -4657,8 +4798,8 @@
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x3c 0x01 -->
-                <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
-                <Register field="SRC1O_CH_SEL_2[3:0]" value="0"/>
+                <Register field="SRC1O_CH_SEL_1[3:0]" value="0010"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="0011"/>
                 <!-- Register 0x51 0x15 -->
                 <Register field="SRC1O_EN" value="1"/>
                 <Register field="SRC1I_EN" value="1"/>
@@ -4683,7 +4824,7 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -4691,14 +4832,19 @@
                 <!-- Register 0x58 0xb7 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
@@ -4747,14 +4893,19 @@
                 <Register field="SRC1O_CH_SEL_1[3:0]" value="0"/>
                 <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40 -->
@@ -4822,8 +4973,8 @@
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x51 0x15 -->
-                <Register field="SRC1O_EN" value="0"/>
-                <Register field="SRC1I_EN" value="0"/>
+                <Register field="SRC1O_EN" value="1"/>
+                <Register field="SRC1I_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x12 -->
                 <Register field="MICPGA1_GAIN[4:0]"/>
@@ -4851,12 +5002,12 @@
                 <Register field="PDM1_DIS_MODE[1:0]" value="10"/>
                 <Register field="PDM1_EN" value="1"/>
                 <!-- Register 0x53 0x77-->
-                <Register field="VOL_CH_SEL_3[3:0]" value="100"/>
-                <Register field="VOL_CH_SEL_4[3:0]" value="100"/>
+                <Register field="VOL_CH_SEL_3[3:0]" value="1110"/>
+                <Register field="VOL_CH_SEL_4[3:0]" value="1110"/>
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x23 0x7A -->
                 <Register field="PDM_CTRL_GO" value="1"/>
                 <Register field="PDM_CTRL_REP[2:0]" value="111"/>
@@ -4866,16 +5017,21 @@
                 <!-- Register 0x25 0xD8 -->
                 <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
                 <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
+                <Register field="PDM_CTRL_REP[2:0]" value="011"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
@@ -4888,14 +5044,19 @@
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x51 0x15 -->
@@ -4970,8 +5131,10 @@
                 <Register field="PDM_CTRL_REP[2:0]" value="0"/>
             </AudioComponent>
         </Operation>
-        <Operation identifier="SETVOLUME"/>
-        <Operation identifier="MUTE"/>
+        <Operation identifier="SETVOLUME">
+        </Operation>
+        <Operation identifier="MUTE">
+        </Operation>
     </AudioPath>
     <AudioPath identifier="Mic2LoopPlayToEarphone">
         <Operation identifier="ENABLE">
@@ -5019,11 +5182,11 @@
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x51 0x15 -->
-                <Register field="SRC1O_EN" value="0"/>
-                <Register field="SRC1I_EN" value="0"/>
+                <Register field="SRC1O_EN" value="1"/>
+                <Register field="SRC1I_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x13 -->
-                <Register field="MICPGA2_GAIN[4:0]"/>
+                <Register field="MICPGA2_GAIN[4:0]" />
                 <!-- Register 0x50 0x0f -->
                 <Register field="ZCDET_EN" value="0"/>
                 <Register field="MIX_EQ_EN" value="1"/>
@@ -5036,9 +5199,9 @@
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="200"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="ELBA">
+                <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x52 0x68 -->
-                <Register field="VOL_CH_SEL_1[3:0]" value="101"/>
+                <Register field="VOL_CH_SEL_1[3:0]" value="1111"/>
                 <!-- Register 0x29 0x0b -->
                 <Register field="EP_HIGHGAIN"/>
                 <Register field="EAR_IN_SEL[1:0]" value="1"/>
@@ -5051,6 +5214,7 @@
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x51 0x15 -->
                 <Register field="SRC1O_EN" value="0"/>
+                <Register field="SRC1I_EN" value="0"/>
                 <Register field="SAI1_EN" value="0"/>
                 <!-- Register 0x16 0x09 -->
                 <Register field="EXTMIC_BIAS" value="0"/>
@@ -5153,7 +5317,8 @@
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x51 0x15 -->
-                <Register field="SRC1O_EN" value="0"/>
+                <Register field="SRC1O_EN" value="1"/>
+                <Register field="SRC1I_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
                 <!-- Register 0x13 -->
                 <Register field="MICPGA2_GAIN[4:0]"/>
@@ -5169,7 +5334,7 @@
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x53 0x77-->
-                <Register field="VOL_CH_SEL_3[3:0]" value="101"/>
+                <Register field="VOL_CH_SEL_3[3:0]" value="1111"/>
                 <!-- Register 0x51 0x05-->
                 <Register field="SRC1I_EN" value="0"/>
                 <Register field="SAI1_EN" value="1"/>
@@ -5178,7 +5343,7 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -5186,28 +5351,38 @@
                 <!-- Register 0x58 0xb7 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x21 0x40 -->
@@ -5311,12 +5486,15 @@
                 <Register field="SAI1_BCLK_INV" value="0"/>
                 <Register field="SAI1_FSYN_INV" value="0"/>
                 <!-- Register 0x51 0x15 -->
-                <Register field="SRC1O_EN" value="0"/>
-                <Register field="SRC1I_EN" value="0"/>
+                <Register field="SRC1O_EN" value="1"/>
+                <Register field="SRC1I_EN" value="1"/>
                 <Register field="SAI1_EN" value="1"/>
+                <!-- Register 0x3c 0x01 -->
+                <Register field="SRC1O_CH_SEL_1[3:0]" value="1"/>
+                <Register field="SRC1O_CH_SEL_2[3:0]" value="1"/>
                 <!-- Register 0x13 -->
                 <Register field="MICPGA2_GAIN[4:0]"/>
-            </AudioComponent>
+             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="15"/>
             </AudioComponent>
@@ -5333,7 +5511,8 @@
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x55 0x20 -->
-                <Register field="RAMP_TIME_SEL[3:0]" value="10"/>
+                <Register field="RAMP_TIME_SEL[3:0]" value="1"/>
+                <Register field="AUTOMUTE_MODE_PDM[1:0]" value="0"/>
                 <!-- Register 0x58 0x00 -->
                 <Register field="VOL_SEL_3[7:0]" value="0"/>
                 <!-- Register 0x59 0x00 -->
@@ -5345,31 +5524,36 @@
                 <Register field="PDM1_DIS_MODE[1:0]" value="10"/>
                 <Register field="PDM1_EN" value="1"/>
                 <!-- Register 0x53 0x77-->
-                <Register field="VOL_CH_SEL_3[3:0]" value="101"/>
-                <Register field="VOL_CH_SEL_4[3:0]" value="101"/>
+                <Register field="VOL_CH_SEL_3[3:0]" value="1110"/>
+                <Register field="VOL_CH_SEL_4[3:0]" value="1110"/>
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x23 0x7A -->
                 <Register field="PDM_CTRL_GO" value="1"/>
                 <Register field="PDM_CTRL_REP[2:0]" value="111"/>
                 <Register field="PDM_CTRL_16BIT_EN" value="0"/>
                 <Register field="PDM_CTRL_DIS1" value="1"/>
-                <Register field="PDM_CTRL_DIS2" value="0"/>
+                <Register field="PDM_CTRL_DIS2" value="1"/>
                 <!-- Register 0x25 0xD8 -->
                 <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
                 <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
+                <Register field="PDM_CTRL_REP[2:0]" value="011"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
@@ -5382,14 +5566,19 @@
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x51 0x15 -->
@@ -5436,6 +5625,10 @@
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
                 <Register field="PDM1_EN" value="0"/>
                 <!-- Register 0x30 0xf -->
+                <Register field="SAI1_R_ALIGN" value="0"/>
+                <Register field="SAI1_WLEN[1:0]" value="0"/>
+                <Register field="SAI1_DELAY_MODE" value="0"/>
+                <Register field="SAI1_I2S_MODE" value="0"/>
                 <Register field="SAI1_MASTER" value="0"/>
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
@@ -5451,8 +5644,9 @@
                 <!-- Register 0x53 0x77-->
                 <Register field="VOL_CH_SEL_3[3:0]" value="0"/>
                 <Register field="VOL_CH_SEL_4[3:0]" value="1"/>
-                <!-- Register 0x55 0x0 -->
+                <!-- Register 0x55 0x20 -->
                 <Register field="RAMP_TIME_SEL[3:0]" value="0"/>
+                <Register field="AUTOMUTE_MODE_PDM[1:0]" value="0"/>
                 <!-- Register 0x23 0x0 -->
                 <Register field="PDM_CTRL_GO" value="0"/>
                 <Register field="PDM_CTRL_REP[2:0]" value="0"/>
@@ -5502,6 +5696,7 @@
                 <!-- Register 0x31 0x49 -->
                 <Register field="SAI1_SINGLE_FSYN" value="0"/>
                 <Register field="SAI1_FSYN_RATE[3:0]" value="1001"/>
+
                 <Register field="SAI1_BCLK_OSR[2:0]" value="1"/>
                 <!-- Register 0x32 0x04 -->
                 <Register field="SAI1_PD_ON_CH0" value="0"/>
@@ -5702,7 +5897,7 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x20 0xC9 -->
                 <Register field="PDM_PAD_MODE[1:0]" value="11"/>
                 <Register field="PDM1_DIS_MODE[1:0]" value="0"/>
@@ -5710,28 +5905,38 @@
                 <!-- Register 0x58 0xb7 -->
                 <Register field="VOL_SEL_3[7:0]"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x51 0x15 -->
@@ -5853,7 +6058,7 @@
                 <Register field="MICPGA1_GAIN[4:0]"/>
                 <!-- Register 0x13 -->
                 <Register field="MICPGA2_GAIN[4:0]"/>
-            </AudioComponent>
+             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="15"/>
             </AudioComponent>
@@ -5891,7 +6096,7 @@
                 <!-- Register 0x21 0x40 -->
                 <Register field="PDM_RB4L" value="1"/>
                 <Register field="PDMCLK_DLY_SEL[2:0]" value="0"/>
-                <Register field="PDM_MODE_SEL[2:0]" value="1"/>
+                <Register field="PDM_MODE_SEL[2:0]" value="0"/>
                 <!-- Register 0x25 0xAC -->
                 <Register field="PDM_CTRL_PATT_LSB[7:0]" value="10101100"/>
                 <!-- Register 0x23 0x7A -->
@@ -5903,16 +6108,21 @@
                 <!-- Register 0x25 0xD8 -->
                 <Register field="PDM_CTRL_PATT_LSB[7:0]"/>
                 <!-- Register 0x23 0x5A -->
-                <Register field="PDM_CTRL_REP[2:0]" value="11"/>
+                <Register field="PDM_CTRL_REP[2:0]" value="011"/>
             </AudioComponent>
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="PDM_DDLY" value="1111"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="PDM_DDLY" value="111"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
-                <Register field="DIG_GAIN"/>
-                <Register field="ANA_GAIN"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="1"/>
+                <Register field="CLASSD_LDOEN" value="1"/>
+                <Register field="CLASSD_EN" value="1"/>
             </AudioComponent>
             <AudioComponent control_protocol="SLEEP" identifier="DELAY">
                 <Delay value="20"/>
@@ -5925,14 +6135,19 @@
             </AudioComponent>
         </Operation>
         <Operation identifier="DISABLE">
-            <AudioComponent control_protocol="I2C" identifier="PMIC">
+            <AudioComponent control_protocol="I2C" identifier="USTICA">
                 <!-- Register 0x48 -->
-                <Register field="ANA_GAIN" value="01"/>
-                <Register field="DIG_GAIN" value="11"/>
-                <Register field="PDM_DDLY" value="0"/>
-                <Register field="PONZA_LR_POL" value="0"/>
-                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="PDM_LR_SEL" value="0"/>
                 <Register field="CLASSD_OC" value="0"/>
+                <!-- Register 0x4a -->
+                <Register field="CLASSD_GAIN"/>
+                <Register field="CLASSD_OC_EN" value="0"/>
+                <Register field="CLASSD_EN_SPD" value="0"/>
+                <!-- Register 0x4b 0x07 -->
+                <Register field="CLASSD_DIG_EN" value="0"/>
+                <Register field="CLASSD_LDOEN" value="0"/>
+                <Register field="CLASSD_EN" value="0"/>
+                <Register field="PDM_DDLY" value="0"/>
             </AudioComponent>
             <AudioComponent control_protocol="I2C" identifier="ELBA">
                 <!-- Register 0x51 0x15 -->
