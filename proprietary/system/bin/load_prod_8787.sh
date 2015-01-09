@@ -9,7 +9,7 @@ echo 1 > /sys/class/rfkill/rfkill0/state
 
 insmod /system/lib/modules/mlan.ko
 insmod /system/lib/modules/sd8xxx.ko
-insmod /system/lib/modules/bt8xxx.ko
+insmod /system/lib/modules/mbt8xxx.ko
 
 ifconfig mlan0 up
 hciconfig hci0 up
