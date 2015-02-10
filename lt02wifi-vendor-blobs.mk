@@ -137,10 +137,8 @@ PRODUCT_COPY_FILES += \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_basic_element.xml:system/etc/audio_basic_element.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_coeff_config.xml:system/etc/audio_coeff_config.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_effect_config.xml:system/etc/audio_effect_config.xml \
-    vendor/samsung/lt02wifi/proprietary/system/etc/audio_effects.conf:system/etc/audio_effects.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_gain_config.xml:system/etc/audio_gain_config.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_path_config.xml:system/etc/audio_path_config.xml \
-    vendor/samsung/lt02wifi/proprietary/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_swvol_calibration_def.xml:system/etc/audio_swvol_calibration_def.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_swvol_config.xml:system/etc/audio_swvol_config.xml \
     vendor/samsung/lt02wifi/proprietary/system/etc/audio_swvol_element.xml:system/etc/audio_swvol_element.xml \
