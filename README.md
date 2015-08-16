@@ -1,4 +1,4 @@
-android_vendor_samsung_lt02wifi
+android_vendor_samsung_lt023g
 ===============================
 
-Proprietary files for lt02wifi
+Proprietary files for lt023g borrowed from lt02wifi
